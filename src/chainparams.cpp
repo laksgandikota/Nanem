@@ -48,7 +48,7 @@ static CBlock CreateGenesisBlock(const char* pszTimestamp, const CScript& genesi
  */
 static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
 {
-    const char* pszTimestamp = "Its the day after the festival 20/Oct/2017 - Happy Diwali all!";
+    const char* pszTimestamp = "Its the day after the festival 20/Oct/2017 Happy Diwali all";
     const CScript genesisOutputScript = CScript() << ParseHex("0459f37c17039219dbba6dcef2f124f6d517f7dc61861bc87e508f59c8c9cdc10876431374bcd26dcfe3f767beb7a1d27a697b61c6e9d82e651568b0f56e7754c9") << OP_CHECKSIG;
     return CreateGenesisBlock(pszTimestamp, genesisOutputScript, nTime, nNonce, nBits, nVersion, genesisReward);
 }
@@ -118,20 +118,21 @@ public:
         nDefaultPort = 6333;
         nPruneAfterHeight = 100000;
         // CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
-        genesis = CreateGenesisBlock(1508654351, 123456, 0x1d00ffff, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(1508654351, 2162587317, 0x1d00ffff, 1, 50 * COIN);
+        
         consensus.hashGenesisBlock = genesis.GetHash();
         printf("%s\n", genesis.GetHash().ToString().c_str());
         printf("%s\n", consensus.hashGenesisBlock.ToString().c_str());
         printf("%s\n", genesis.hashMerkleRoot.ToString().c_str());
-        assert(consensus.hashGenesisBlock == uint256S("0x000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f"));
-        assert(genesis.hashMerkleRoot == uint256S("0xb61b8b8aa5668c3aed11cb555dc08279b97232e0fe2699631d312a7de959092b"));
+        assert(consensus.hashGenesisBlock == uint256S("0x00000000e58db66511eaea6dd7051a3d7d3041731b1e79487afcc320de39838b"));
+        assert(genesis.hashMerkleRoot == uint256S("0xffc380e54df99a8800bc25de0f2028f574f2943f8d0759d94f82589db1e1ce02"));
         // Note that of those with the service bits flag, most only support a subset of possible options
-        vSeeds.emplace_back("seed.bitcoin.sipa.be", true); // Pieter Wuille, only supports x1, x5, x9, and xd
-        vSeeds.emplace_back("dnsseed.bluematt.me", true); // Matt Corallo, only supports x9
-        vSeeds.emplace_back("dnsseed.bitcoin.dashjr.org", false); // Luke Dashjr
-        vSeeds.emplace_back("seed.bitcoinstats.com", true); // Christian Decker, supports x1 - xf
-        vSeeds.emplace_back("seed.bitcoin.jonasschnelli.ch", true); // Jonas Schnelli, only supports x1, x5, x9, and xd
-        vSeeds.emplace_back("seed.btc.petertodd.org", true); // Peter Todd, only supports x1, x5, x9, and xd
+//        vSeeds.emplace_back("seed.bitcoin.sipa.be", true); // Pieter Wuille, only supports x1, x5, x9, and xd
+//        vSeeds.emplace_back("dnsseed.bluematt.me", true); // Matt Corallo, only supports x9
+//        vSeeds.emplace_back("dnsseed.bitcoin.dashjr.org", false); // Luke Dashjr
+//        vSeeds.emplace_back("seed.bitcoinstats.com", true); // Christian Decker, supports x1 - xf
+//        vSeeds.emplace_back("seed.bitcoin.jonasschnelli.ch", true); // Jonas Schnelli, only supports x1, x5, x9, and xd
+//        vSeeds.emplace_back("seed.btc.petertodd.org", true); // Peter Todd, only supports x1, x5, x9, and xd
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,0);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,5);
