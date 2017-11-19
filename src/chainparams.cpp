@@ -111,10 +111,10 @@ public:
          * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
          * a large 32-bit integer with any alignment.
          */
-        pchMessageStart[0] = 0xf9;
-        pchMessageStart[1] = 0xbe;
-        pchMessageStart[2] = 0xb4;
-        pchMessageStart[3] = 0xd9;
+        pchMessageStart[0] = 0x4c;
+        pchMessageStart[1] = 0x47;
+        pchMessageStart[2] = 0x41;
+        pchMessageStart[3] = 0x47;
         nDefaultPort = 6333;
         nPruneAfterHeight = 100000;
         // CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
@@ -127,6 +127,11 @@ public:
         assert(consensus.hashGenesisBlock == uint256S("0x00000000e58db66511eaea6dd7051a3d7d3041731b1e79487afcc320de39838b"));
         assert(genesis.hashMerkleRoot == uint256S("0xffc380e54df99a8800bc25de0f2028f574f2943f8d0759d94f82589db1e1ce02"));
         // Note that of those with the service bits flag, most only support a subset of possible options
+        
+        
+        vFixedSeeds.clear();
+        vSeeds.clear();
+//        vSeeds.emplace_back("127.0.0.1", true);
 //        vSeeds.emplace_back("seed.bitcoin.sipa.be", true); // Pieter Wuille, only supports x1, x5, x9, and xd
 //        vSeeds.emplace_back("dnsseed.bluematt.me", true); // Matt Corallo, only supports x9
 //        vSeeds.emplace_back("dnsseed.bitcoin.dashjr.org", false); // Luke Dashjr
@@ -219,19 +224,19 @@ public:
         pchMessageStart[3] = 0x07;
         nDefaultPort = 16333;
         nPruneAfterHeight = 1000;
-
-        genesis = CreateGenesisBlock(1296688602, 414098458, 0x1d00ffff, 1, 50 * COIN);
+                //CreateGenesisBlock(nTime, nNonce, nBits, nVersion, genesisReward)
+        genesis = CreateGenesisBlock(1511072116, 4059301489, 0x1d00ffff, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x000000000933ea01ad0ee984209779baaec3ced90fa3f408719526f8d77f4943"));
-        assert(genesis.hashMerkleRoot == uint256S("0x4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b"));
+        assert(consensus.hashGenesisBlock == uint256S("0x000000007a5ef61ffacb1db816c0bb26664f84937408ecfa2f767bb9d914bfad"));
+        assert(genesis.hashMerkleRoot == uint256S("0xffc380e54df99a8800bc25de0f2028f574f2943f8d0759d94f82589db1e1ce02"));
 
-        //vFixedSeeds.clear();
-        //vSeeds.clear();
+        vFixedSeeds.clear();
+        vSeeds.clear();
         // nodes with support for servicebits filtering should be at the top
-        vSeeds.emplace_back("testnet-seed.bitcoin.jonasschnelli.ch", true);
-        vSeeds.emplace_back("seed.tbtc.petertodd.org", true);
-        vSeeds.emplace_back("testnet-seed.bluematt.me", false);
-        vSeeds.emplace_back("testnet-seed.bitcoin.schildbach.de", false);
+//        vSeeds.emplace_back("testnet-seed.bitcoin.jonasschnelli.ch", true);
+//        vSeeds.emplace_back("seed.tbtc.petertodd.org", true);
+//        vSeeds.emplace_back("testnet-seed.bluematt.me", false);
+//        vSeeds.emplace_back("testnet-seed.bitcoin.schildbach.de", false);
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,111);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,196);
@@ -304,10 +309,19 @@ public:
         nDefaultPort = 18444;
         nPruneAfterHeight = 1000;
 
-        genesis = CreateGenesisBlock(1296688602, 2, 0x207fffff, 1, 50 * COIN);
+//        for(int nNonce = 3; nNonce < 20000; nNonce++){
+//            genesis = CreateGenesisBlock(1511075715, nNonce, 0x207fffff, 1, 50 * COIN);
+//            printf("REGTEST genesis.GetHash(): %d %s\n", nNonce, genesis.GetHash().ToString().c_str());
+//
+//        }
+                //CreateGenesisBlock(nTime, nNonce, nBits, nVersion, genesisReward)
+        genesis = CreateGenesisBlock(1511075715, 18968, 0x207fffff, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206"));
-        assert(genesis.hashMerkleRoot == uint256S("0x4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b"));
+        printf("REGTEST genesis.GetHash(): %s\n", genesis.GetHash().ToString().c_str());
+        printf("REGTEST consensus.hashGenesisBlock: %s\n", consensus.hashGenesisBlock.ToString().c_str());
+        printf("REGTEST genesis.hashMerkleRoot: %s\n", genesis.hashMerkleRoot.ToString().c_str());
+        assert(consensus.hashGenesisBlock == uint256S("0x0c39a8500a8b7f7964022eeb0f45ccabe14044036feec1e87f10490dfa3af622"));
+        assert(genesis.hashMerkleRoot == uint256S("0xffc380e54df99a8800bc25de0f2028f574f2943f8d0759d94f82589db1e1ce02"));
 
         vFixedSeeds.clear(); //!< Regtest mode doesn't have any fixed seeds.
         vSeeds.clear();      //!< Regtest mode doesn't have any DNS seeds.
@@ -318,7 +332,7 @@ public:
 
         checkpointData = (CCheckpointData) {
             {
-                {0, uint256S("0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206")},
+                {0, uint256S("0c39a8500a8b7f7964022eeb0f45ccabe14044036feec1e87f10490dfa3af622")},
             }
         };
 
