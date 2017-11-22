@@ -121,14 +121,13 @@ public:
         genesis = CreateGenesisBlock(1508654351, 2162587317, 0x1d00ffff, 1, 50 * COIN);
         
         consensus.hashGenesisBlock = genesis.GetHash();
-        printf("%s\n", genesis.GetHash().ToString().c_str());
-        printf("%s\n", consensus.hashGenesisBlock.ToString().c_str());
-        printf("%s\n", genesis.hashMerkleRoot.ToString().c_str());
+//        printf("%s\n", genesis.GetHash().ToString().c_str());
+//        printf("%s\n", consensus.hashGenesisBlock.ToString().c_str());
+//        printf("%s\n", genesis.hashMerkleRoot.ToString().c_str());
         assert(consensus.hashGenesisBlock == uint256S("0x00000000e58db66511eaea6dd7051a3d7d3041731b1e79487afcc320de39838b"));
         assert(genesis.hashMerkleRoot == uint256S("0xffc380e54df99a8800bc25de0f2028f574f2943f8d0759d94f82589db1e1ce02"));
         // Note that of those with the service bits flag, most only support a subset of possible options
-        
-        
+
         vFixedSeeds.clear();
         vSeeds.clear();
 //        vSeeds.emplace_back("127.0.0.1", true);
@@ -145,11 +144,11 @@ public:
         base58Prefixes[EXT_PUBLIC_KEY] = {0x04, 0x88, 0xB2, 0x1E};
         base58Prefixes[EXT_SECRET_KEY] = {0x04, 0x88, 0xAD, 0xE4};
 
-        vFixedSeeds = std::vector<SeedSpec6>(pnSeed6_main, pnSeed6_main + ARRAYLEN(pnSeed6_main));
+//        vFixedSeeds = std::vector<SeedSpec6>(pnSeed6_main, pnSeed6_main + ARRAYLEN(pnSeed6_main));
 
-        fDefaultConsistencyChecks = false;
+        fDefaultConsistencyChecks = true;
         fRequireStandard = true;
-        fMineBlocksOnDemand = false;
+        fMineBlocksOnDemand = true;
 
         checkpointData = (CCheckpointData) {
             {
@@ -159,7 +158,7 @@ public:
 
         chainTxData = ChainTxData{
             // Data as of block 000000000000000000d97e53664d17967bd4ee50b23abb92e54a34eb222d15ae (height 478913).
-            1508654351, // * UNIX timestamp of last known number of transactions
+            0, // * UNIX timestamp of last known number of transactions
             0,  // * total number of transactions between genesis and that timestamp
                         //   (the tx=... number in the SetBestChain debug.log lines)
             0         // * estimated number of transactions per second after that timestamp
